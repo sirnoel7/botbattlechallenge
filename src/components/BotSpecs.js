@@ -1,7 +1,11 @@
+// BotSpecs.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function BotSpecs({ bot, handleEnlistBot }) {
+function BotSpecs({ match, bots, handleEnlistBot }) {
+  const botId = match.params.botId;
+  const bot = bots.find(bot => bot.id === parseInt(botId));
+
   return (
     <div>
       <h2>{bot.name}</h2>

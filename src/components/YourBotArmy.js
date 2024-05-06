@@ -1,3 +1,4 @@
+// YourBotArmy.js
 import React from 'react';
 
 function YourBotArmy({ enlistedBots, handleReleaseBot }) {

@@ -1,20 +1,40 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
-import { BrowserRouter as Router, Route, Routes,Switch} from 'react-router-dom';
 import BotSpecs from './components/BotSpecs';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
+  const [bots, setBots] = useState([]);
+  const [enlistedBots, setEnlistedBots] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/bots')
+      .then(response => response.json())
+      .then(data => setBots(data));
+  }, []);
+
+  const handleEnlistBot = (bot) => {
+    setEnlistedBots([...enlistedBots, bot]);
+  };
+
+  const handleReleaseBot = (bot) => {
+    setEnlistedBots(enlistedBots.filter(b => b.id !== bot.id));
+  };
+
   return (
     <Router>
       <div className="App">
         <h1>Bot Battlr</h1>
-        <Routes>
-          <Route path="/" exact component={BotCollection} />
-          <Route path="/bots/:botId" component={BotSpecs} />
-        </Routes>
-        <YourBotArmy />
+        <Route path="/" exact render={(props) => (
+          <BotCollection {...props} bots={bots} handleEnlistBot={handleEnlistBot} />
+        )} />
+        <Route path="/bots/:botId" render={(props) => (
+          <BotSpecs {...props} bots={bots} handleEnlistBot={handleEnlistBot} />
+        )} />
+        <YourBotArmy enlistedBots={enlistedBots} handleReleaseBot={handleReleaseBot} />
       </div>
     </Router>
   );
