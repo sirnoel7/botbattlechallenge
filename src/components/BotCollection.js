@@ -1,4 +1,4 @@
-// BotCollection.js
+
 import React, { useState, useEffect } from 'react';
 import SortBar from './SortBar';
 import FilterBar from './FilterBar';

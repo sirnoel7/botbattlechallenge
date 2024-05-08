@@ -1,4 +1,4 @@
-// App.js
+
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import BotCollection from './components/BotCollection';
@@ -11,7 +11,7 @@ function App() {
   const [enlistedBots, setEnlistedBots] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/bots')
+    fetch('http://localhost:3001/bots')
       .then(response => response.json())
       .then(data => setBots(data));
   }, []);

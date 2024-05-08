@@ -1,4 +1,4 @@
-// FilterBar.js
+
 import React from 'react';
 
 function FilterBar({ handleFilter }) {
